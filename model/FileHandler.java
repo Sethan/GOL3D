@@ -1,0 +1,212 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package model;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+/**
+ *
+ * @author ZuraH
+ */
+public class FileHandler {
+    
+    public static void loadFile(CellGraph3D cg3d)
+    {   
+        try
+        {
+            JButton open = new JButton();
+            JFileChooser fc = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Game of Life", "rle3d");
+            fc.setFileFilter(filter);
+            
+            if(fc.showOpenDialog(open)== JFileChooser.APPROVE_OPTION)
+            {
+                String fullPath = fc.getSelectedFile().getAbsolutePath();
+                FileReader fr = new FileReader(fullPath);
+                BufferedReader br = new BufferedReader(fr);
+                String start = br.readLine();//for å fjerne headeren
+
+                for(int i=0; i< cg3d.getCGR().getW();i++)
+                {
+                    String currentLine = RunLengthDecoded(br.readLine());
+                    for(int n=0; n<currentLine.length()-1;n++)
+                    {
+                        if(currentLine.charAt(n)=='b'&&cg3d.getCGR().table.get(i).get(n).isAlive())
+                        {
+                            cg3d.getCGR().table.get(i).get(n).changeState();
+                        }
+                        else if(currentLine.charAt(n)=='o'&&!cg3d.getCGR().table.get(i).get(n).isAlive())
+                        {
+                            cg3d.getCGR().table.get(i).get(n).changeState();
+                        }
+                    }
+                }
+                for(int i=0; i< cg3d.getCGT().getW();i++)
+                {
+                    String currentLine = RunLengthDecoded(br.readLine());
+                    for(int n=0; n<currentLine.length()-1;n++)
+                    {
+                        if(currentLine.charAt(n)=='b'&&cg3d.getCGT().table.get(i).get(n).isAlive())
+                        {
+                            cg3d.getCGT().table.get(n).get(n).changeState();
+                        }
+                        else if(currentLine.charAt(n)=='o'&&!cg3d.getCGT().table.get(i).get(n).isAlive())
+                        {
+                            cg3d.getCGT().table.get(i).get(n).changeState();
+                        }
+                    }
+                }
+                for(int i=0; i< cg3d.getCGL().getW();i++)
+                {
+                    String currentLine = RunLengthDecoded(br.readLine());
+                    for(int n=0; n<currentLine.length()-1;n++)
+                    {
+                        if(currentLine.charAt(n)=='b'&&cg3d.getCGL().table.get(i).get(n).isAlive())
+                        {
+                            cg3d.getCGL().table.get(i).get(n).changeState();
+                        }
+                        else if(currentLine.charAt(n)=='o'&&!cg3d.getCGL().table.get(i).get(n).isAlive())
+                        {
+                            cg3d.getCGL().table.get(i).get(n).changeState();
+                        }
+                    }
+                }
+                
+                
+                br.close();
+                
+            }  
+        }
+        catch(Exception e)
+        {
+            ErrorHandler.showError("Load error", "Make sure to load patterns with simmilar dimensions as the current cube");
+        }
+    }
+    public static void saveFile(CellGraph3D cg3d ) 
+    {
+        try
+        {
+         
+            JButton save = new JButton();
+            JFileChooser fc = new JFileChooser();
+            fc.setFileFilter(new FileNameExtensionFilter("Game of Life", "rle3d"));
+            
+            if(fc.showSaveDialog(save)==JFileChooser.APPROVE_OPTION)
+            {
+                String fullPath = fc.getSelectedFile().getAbsolutePath();
+                FileWriter fw = new FileWriter(fullPath+".rle3d");
+                BufferedWriter bw = new BufferedWriter(fw);
+                StringBuilder sb = new StringBuilder();
+                sb.append("x = "+cg3d.getX()+", y = "+cg3d.getY()+", z = "+cg3d.getZ()+"\n");
+                
+                for(int i=0; i< cg3d.getCGR().getW();i++)
+                {
+                    for(int n=0; n<cg3d.getCGR().getH(); n++)
+                    {
+                       if(cg3d.getCGR().table.get(i).get(n).isAlive())
+                       {
+                           sb.append("o");
+                       }
+                       else
+                       {
+                           sb.append("b");
+                       }
+                    }
+                    sb.append("$\n");
+                } 
+                for(int i=0; i< cg3d.getCGT().getW();i++)
+                {
+                    for(int n=0; n<cg3d.getCGT().getH(); n++)
+                    {
+                       if(cg3d.getCGT().table.get(i).get(n).isAlive())
+                       {
+                           sb.append("o");
+                       }
+                       else
+                       {
+                           sb.append("b");
+                       }
+                    }
+                    sb.append("$\n");
+                }   
+                for(int i=0; i< cg3d.getCGL().getW();i++)
+                {
+                    for(int n=0; n<cg3d.getCGL().getH(); n++)
+                    {
+                       if(cg3d.getCGL().table.get(i).get(n).isAlive())
+                       {
+                           sb.append("o");
+                       }
+                       else
+                       {
+                           sb.append("b");
+                       }
+                    }
+                    sb.append("$\n");
+                }    
+                String s = sb.toString();
+                bw.write(RunLenghtEncoded(s));
+                bw.close();
+                
+            }
+        }
+        catch(Exception e)
+        {
+            ErrorHandler.showError("Save error", e.toString());
+        }
+    }
+    private static String RunLenghtEncoded(String s)
+    {
+        String encodedString ="";
+        for (int i = 0, count = 1; i < s.length();i++)
+        {
+            if(i+1<s.length()&&s.charAt(i) == s.charAt(i+1))
+            {
+                count++;
+            }
+            else 
+            {
+                if(count==1)
+                {
+                    encodedString = encodedString.concat(Character.toString(s.charAt(i)));
+                }
+                else
+                {
+                    encodedString = encodedString.concat(Integer.toString(count)).concat(Character.toString(s.charAt(i)));
+                }
+                count = 1;
+            }
+        }     
+        return encodedString;
+    }
+    private static String RunLengthDecoded(String s)
+    {
+        String decodedString ="";
+        for(int i = 0; i<s.length();i++)
+        {
+            if(Character.isDigit(s.charAt(i)))
+            {
+                for(int n=0; n<(s.charAt(i)-'0');n++)
+                {
+                    decodedString=decodedString.concat(Character.toString(s.charAt(i+1)));
+                    
+                }
+                i++;
+            }
+            else
+            {
+                decodedString=decodedString.concat(Character.toString(s.charAt(i)));
+            }
+        }
+        
+        return decodedString;
+    }
+    
+}

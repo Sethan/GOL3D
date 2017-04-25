@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Controls">
+   <children>
+      <BorderPane layoutX="156.0" layoutY="14.0" prefHeight="627.0" prefWidth="1028.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#loadEvent" text="Load" />
+                    <MenuItem mnemonicParsing="false" onAction="#saveEvent" text="Save" />
+                    <MenuItem mnemonicParsing="false" onAction="#showGraphEvent" text="Create Graph" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#changeDimensions" text="Dimensions" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <bottom>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="43.0" prefWidth="1028.0" spacing="20.0" style="-fx-background-color: FFFF;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="startBtn" depthTest="DISABLE" mnemonicParsing="false" onAction="#startButton" prefHeight="27.0" prefWidth="83.0" text="Start" textFill="#3c3c3c" underline="true">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="stopBtn" mnemonicParsing="false" onAction="#stopButton" prefHeight="27.0" prefWidth="79.0" text="Stop" textFill="#3c3c3c">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Bernard MT Condensed" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="resetBtn" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#resetButton" prefHeight="27.0" prefWidth="89.0" text="Reset" textFill="#3c3c3c">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="14.0" />
+                     </font>
+                  </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Increase Speed" wrappingWidth="98.404296875">
+                     <font>
+                        <Font name="Tahoma" size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Slider fx:id="speedSlider" onMouseDragged="#speedIncreased" prefHeight="27.0" prefWidth="140.0">
+                     <HBox.margin>
+                        <Insets left="-20.0" right="-20.0" top="-0.0" />
+                     </HBox.margin>
+                  </Slider>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Group fx:id="group"/>
+               </children>
+               
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
