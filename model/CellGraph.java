@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author lars
  */
-public class CellGraph 
+public abstract class CellGraph 
 {
     public ArrayList<ArrayList<Cell>> table;
     private final int cellWidth;
@@ -44,9 +44,10 @@ public class CellGraph
     {
         this.copy=copy;
     }
-    public int getAlive()
+    public int[] getData()
     {
         int alive = 0;
+        int posisitionSum=0;
         for(int i=0; i< this.getW();i++)
         {
             for(int n=0; n<this.getH(); n++)
@@ -54,10 +55,14 @@ public class CellGraph
                 if(this.table.get(i).get(n).isAlive())
                 {
                     alive++;
+                    posisitionSum=posisitionSum+i+n;
                 }
             }
         }
-        return alive;
+        int[] data = new int[2];
+        data[0]=alive;
+        data[1]=posisitionSum;
+        return data;
     }
     public void decide(int x , int y, CellGraph3D cg3d)
     {
@@ -80,14 +85,8 @@ public class CellGraph
         }
     }
     
-    public int countNeighbours(int x, int y, CellGraph3D test)
-    {
-        
-        return -1;
-        //en generisk ubrukelig metode
+    public abstract int countNeighbours(int x, int y, CellGraph3D test);
 
-    }
-    
     public void resetGraph()
     {
         for(int i=0; i < this.cellWidth; i++)

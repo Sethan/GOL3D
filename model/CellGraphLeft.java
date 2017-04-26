@@ -20,7 +20,7 @@ public class CellGraphLeft extends CellGraph{
             this.table.add(new ArrayList<Cell>());
             for(int n=0; n < y; n++)
             {
-               this.table.get(i).add(new Cell(19,19,1,i,n));
+               this.table.get(i).add(new Cell(19,19,1));
             }
         }
     }

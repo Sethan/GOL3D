@@ -110,11 +110,13 @@ public class Controls implements Initializable {
     
     public void resetButton(ActionEvent event)
     {
+        play=false;
         test.getCGL().resetGraph();
         test.getCGR().resetGraph();
         test.getCGT().resetGraph();
         GraphicsHandler.Paint(test);
         lineData.resetData();
+        lineData.updateGraph(lineChart);
     }
     
     public void loadEvent(ActionEvent event)
@@ -159,9 +161,10 @@ public class Controls implements Initializable {
         {
             if(play)
             {  
-                int totalSum=test.getCGL().getAlive()+test.getCGR().getAlive()+test.getCGT().getAlive();
-                lineData.updateData(totalSum);
-                
+                int[] data= new int[2];
+                data[0]=test.getCGL().getData()[0]+test.getCGR().getData()[0]+test.getCGT().getData()[0];
+                data[1]=test.getCGL().getData()[1]+test.getCGR().getData()[1]+test.getCGT().getData()[1];
+                lineData.updateData(data[0],data[1]);            
                 RunTopTask rtt = new RunTopTask();
                 RunRightTask rrt = new RunRightTask();
                 RunLeftTask rlt = new RunLeftTask();
