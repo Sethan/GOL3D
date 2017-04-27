@@ -5,6 +5,7 @@
  */
 package model;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -142,21 +143,20 @@ public class GraphicsHandler {
         Rotate rotateY = new Rotate(135, Rotate.Y_AXIS);
         Rotate rotateZ = new Rotate(-90, Rotate.Z_AXIS);
         
-        double scaleValue=2.58-0.67*Math.log(average);
+        double scaleValue=2.58-0.62*Math.log(average);
         Scale scale = new Scale(scaleValue, scaleValue, scaleValue);
         
         
         g.getTransforms().addAll(trans, scale, rotateX, rotateY, rotateZ); 
     }
-    public static void Paint(CellGraph3D cg3d) throws ArrayIndexOutOfBoundsException
+    public static void Paint(CellGraph3D cg3d)
     {
         PhongMaterial white = new PhongMaterial(Color.rgb(255,255,255));
         
         int maxGreen=255/cg3d.getY();
         int maxBlue=255/cg3d.getZ();
         int maxRed=255/cg3d.getX();
-        
-        try
+        Platform.runLater(()->
         {
             for(int i=0; i< cg3d.getCGR().getW();i++)
             {
@@ -203,11 +203,7 @@ public class GraphicsHandler {
                     }
                 }
             }
-        }
-        catch(ArrayIndexOutOfBoundsException|NullPointerException e)
-        {
-            System.err.println("Error is"+e.toString());
-        }
+        });
    }
 
 }

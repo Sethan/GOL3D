@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package model;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -62,13 +61,13 @@ public class DimensionHandler {
     {
         try
         {
-            if(Integer.parseInt(number)>0&&Integer.parseInt(number)<15)
+            if(Integer.parseInt(number)>0&&Integer.parseInt(number)<21)
             {
                 return Integer.parseInt(number);  
             }
             else
             {
-                ErrorHandler.showError("Out of bounds error", number+" is not a valid number, only real numbers between 0 and 15");
+                ErrorHandler.showError("Out of bounds error", number+" is not a valid number, only real numbers (min 1, max 20)");
                 return 7;
             }
         }
