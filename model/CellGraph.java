@@ -60,9 +60,9 @@ public abstract class CellGraph
             }
         }
         int[] data = new int[2];
-        data[0]=alive;
-        data[1]=posisitionSum;
-        return data;
+        data[0]=alive; // inneholder informasjon om alive varibalen
+        data[1]=posisitionSum;// inneholder informasjonen om positionsum
+        return data; // returner informasjonen i data.
     }
     public void decide(int x , int y, CellGraph3D cg3d)
     {
