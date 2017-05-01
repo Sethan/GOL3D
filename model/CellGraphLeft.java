@@ -10,7 +10,8 @@ import java.util.ArrayList;
 /**
  *
  * @author ZuraH
- */
+ */ 
+// For hver x vil klassen danne en arraylist i table og fylle den med en box på 19,19,1
 public class CellGraphLeft extends CellGraph{
     public CellGraphLeft(int x, int y)
     {
