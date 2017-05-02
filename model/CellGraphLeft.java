@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author ZuraH
  */ 
-// oppretter en 2D tabell av typen cell med dimisjonene 19, 19, 1. 
+// oppretter en 2D tabell av typen cell med dimisjonene (19, 19, 1). 
 public class CellGraphLeft extends CellGraph{
     public CellGraphLeft(int x, int y)
     {
