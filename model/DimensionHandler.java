@@ -16,6 +16,7 @@ import javafx.stage.StageStyle;
  *
  * @author ZuraH
  */
+ // danner en dialog box med en knapp og 3 felter(for å skrive inn verdier) 
 public class DimensionHandler {
     public static CellGraph3D createDialog()
     {
@@ -57,6 +58,9 @@ public class DimensionHandler {
 
         return null;
     }
+    // Her dannes det en form for tilbake melding til brukern dersom brukeren enten ikke fyller inn verdier, eller setter inn ugyldige verdier.
+    // Dette vil si; Hvis brukeren setter in Char verdier istedenfor Int verdier eller om brukeren velger int verdier etter max(som er tall fra 1 til 20)
+    // Hvis brukeren gjør en av feilene over vil en "error" melding poppe up som ber brukeren om å sette inn valid numbers. 
     public static int returnInt(String number)
     {
         try
@@ -73,7 +77,7 @@ public class DimensionHandler {
         }
         catch(NumberFormatException e)
         {
-            ErrorHandler.showError("Format error", number+" is not a valid number, only real numbers between 0 and 15");
+            ErrorHandler.showError("Format error", number+" is not a valid number, only real numbers between 0 and 20");
             return 7;
         }
     }
