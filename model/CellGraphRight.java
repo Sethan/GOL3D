@@ -31,9 +31,9 @@ public class CellGraphRight extends CellGraph {
     //starte med 12-1 og 9-1.(i vil gjelde for 12 og n vil gjelde for 9)
     // også vil den jobbe seg opp til 12+1, 9+1. Den vil unngå n=0 og i= 0 fordi dette er den opprinlige cellen, siden programmeret skal 
     //representere 3d modell så har vi en bestemt tilfelle når vi kommer utenfor lengeden til tabellen.
-    // Hvis y + n er større enn høyden - 1 og hvis top grafen's (x + i, siste element i høyden) hvis denne lever så telles den som nabo, 
+    // Hvis y + n er større enn høyden - 1 og hvis top grafen's (x + i, siste element i bredden) hvis denne lever så telles den som nabo, 
     //og hvis x + i er større enn bredden
-    // så bruker vi høyre graf sin (y+n, siste element i høyden) sjekker vi også om denne lever og om den lever teller vi den som nabo.
+    // så bruker vi top graf sin (y+n, siste element i bredden) sjekker vi også om denne lever og om den lever teller vi den som nabo.
     @Override
     public int countNeighbours(int x, int y, CellGraph3D cg3d)
     {
@@ -54,6 +54,7 @@ public class CellGraphRight extends CellGraph {
                         
                     }
                    // vil sjekke left grafens (bredde - 1, x + n) hvis y + n er større enn høyde - 1.
+                   
                    else if((y+n>this.getH()-1))
                     {
                         if(cg3d.getCGL().table.get(cg3d.getCGL().getW()-1).get(x+i).isAlive())
@@ -61,7 +62,8 @@ public class CellGraphRight extends CellGraph {
                            neighbours++;
                         }
                     }
-                    // vil sjekke top grafens bredde -1, y+n, dette gjør den hvis x+i er større en bredden -1.
+                    // vil sjekke top grafens bredde -1, y+n, dette gjør den hvis x+i er større en bredden -1. 
+                    
                     else if((x+i>this.getW()-1))
                     {
                         if(cg3d.getCGT().table.get(cg3d.getCGT().getW()-1).get(y+n).isAlive())
