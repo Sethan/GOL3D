@@ -33,6 +33,9 @@ public class FileHandler {
                 BufferedReader br = new BufferedReader(fr);
                 String start = br.readLine();//for å fjerne headeren
 
+                //Her vil programmet load-e filen vi har lagret, for at den skal kunne gjøre dette må programmet dekryte filen
+                //(filen vil bli dekrypta fra rle fil til string fil og deretteter fjerne øverste linja og fra der vil den 
+                //ta for seg en og en linje. Dersom det inneholder tilstander som orignialen ikke har endres tilstandene. 
                 for(int i=0; i< cg3d.getCGR().getW();i++)
                 {
                     String currentLine = RunLengthDecoded(br.readLine());
@@ -89,6 +92,10 @@ public class FileHandler {
             ErrorHandler.showError("Load error", "Make sure to load patterns with simmilar dimensions as the current cube");
         }
     }
+    // Koden vil gå igjennom cellgraphLeft, cellgraphTop og cellgraphTop for å finne levende celler
+    //dersom den finner levende celler blir disse lagret som "o", og alle celler som ikke lever vil bli lagret som "b".
+    //for hver gang koden går igjennom ei rad (for finne levende celler) vil det legges til et symbol "$" i enden av raden.
+    // Programmet vil også lagre dimisjonen til mønsteret først.
     public static void saveFile(CellGraph3D cg3d ) 
     {
         try
@@ -121,6 +128,8 @@ public class FileHandler {
                     }
                     sb.append("$\n");
                 } 
+                
+                //
                 for(int i=0; i< cg3d.getCGT().getW();i++)
                 {
                     for(int n=0; n<cg3d.getCGT().getH(); n++)
