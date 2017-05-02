@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author ZuraH
  */ 
-// For hver x vil klassen danne en arraylist i table og fylle den med en box på 19,19,1
+// oppretter en 2D tabell av typen cell med dimisjonene 19, 19, 1. 
 public class CellGraphLeft extends CellGraph{
     public CellGraphLeft(int x, int y)
     {
@@ -26,6 +26,11 @@ public class CellGraphLeft extends CellGraph{
         }
     }
     @Override
+    // teller naboene til en bestemt cell som lever eller ikke lever. 
+    // Dette utføres ved at den vil starte med ei celle som for eksempel har posisjonen 12,9,. Koden vil da ta koordinatene den fikk og starte med 12-1 og 9-1.(i vil gjelde for 12 og n vil gjelde for 9)
+    // også vil den jobbe seg opp til 12+1, 9+1. Den vil unngå n=0 og i= 0 fordi dette er den opprinlige cellen, siden programmeret skal representere 3d modell så har vi en bestemt tilfelle når vi kommer utenfor lengeden til tabellen. 
+    // Hvis y + n er større enn høyden - 1 og hvis top grafen's (x + i, siste element i høyden) hvis denne lever så telles den som nabo, og hvis x + i er større enn bredden
+    // så bruker vi høyre graf sin (y+n, siste element i høyden) sjekker vi også om denne lever og om den lever teller vi den som nabo.
     public int countNeighbours(int x, int y, CellGraph3D cg3d)
     {
         int neighbours=0;
