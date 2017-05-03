@@ -13,6 +13,7 @@ import javafx.stage.StageStyle;
  *
  * @author ZuraH
  */
+// oppretter en feil-melding med titlen error og header/inneholdet blir bestemt andre steder.
 public class ErrorHandler {
     public static void showError(String type, String info)
     {
