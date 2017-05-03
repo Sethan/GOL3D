@@ -13,6 +13,8 @@ import javafx.scene.chart.XYChart;
  *
  * @author ZuraH
  */
+
+   // LineGraphData inneholder 2d integer tabell kalt data. Formålet er å lagre informasjon hentet fra hovedprogrammet. 
 public class LineGraphData {
     
     private ArrayList<ArrayList<Integer>> data;
@@ -21,6 +23,8 @@ public class LineGraphData {
     {
         this.data = new ArrayList<ArrayList<Integer>>();
     }
+    // Updatedata lager en ny kolonne med to rader og radene inneholder tallet a og b, a er antall levende celler og 
+    // b er summen av posisjonene til alle levende celler. 
     
     public void updateData(Integer a, Integer b) 
     {
@@ -28,6 +32,10 @@ public class LineGraphData {
         this.data.get(this.data.size()-1).add(a);
         this.data.get(this.data.size()-1).add(b);
     }
+    // UpdateGraph oppdateterer grafen til linechart lc med informasjonen fra updatedata.
+    // Den oppretter tre serier(levende celler, forandring av levende celler og likehetsmåling)
+    //For å iterere gjennom tabellen og regne ut de tre seriene starter løkken i i=1 og avslutter i det nest siste elementet, dette 
+    //Dette er viktig for å ikke få noen udefinerte verdier fra tabellen, t1 henter tall fra forrige iterasjon, og change henter fra neste iterasjon
     public void updateGraph(LineChart lc)
     {
         lc.getData().clear();
@@ -71,6 +79,7 @@ public class LineGraphData {
         lc.getData().add(changeCells);
         lc.getData().add(similarity);
     }
+    //resetDate sletter all informasjon i data.
     public void resetData()
     {
         this.data.clear();
