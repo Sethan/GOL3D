@@ -18,6 +18,9 @@ import javafx.scene.transform.Translate;
  *
  * @author lars
  */
+// CreatePlaneR gir posisjoner til alle cellene i cellgraphright,dette gjøres ved at for loopet går gjennom tabellen og 
+//bestemmer posisjonen til cellen ut i fra posisijonen den har i tabellen. 
+
 public class GraphicsHandler {
     public static void CreatePlaneR(CellGraph3D cg3d, Group g)
     {
@@ -35,6 +38,8 @@ public class GraphicsHandler {
             }
         }
     }
+    // CreateGridlines lager boxer med dimisjonene 1,1 og lengden til et plan(rekkefølgen på dimisjonene varierer). Dette skjer ved at 
+    // for loopen går igjennom z,x,y dimisjonene til kuben og plasserer boxer med mellomrom som er på størrelsen med en celle. 
     
     public static void CreateGridLines(CellGraph3D cg3d, Group g)
     {
@@ -92,7 +97,8 @@ public class GraphicsHandler {
             g.getChildren().add(b);
         }
     }
-    
+    // CreatePlaneL gir posisjoner til alle cellene i cellgraphLeft,dette gjøres ved at for loopet går gjennom tabellen og 
+   //bestemmer posisjonen til cellen ut i fra posisijonen den har i tabellen. 
     public static void CreatePlaneL(CellGraph3D cg3d, Group g)
     {
         int x = cg3d.getX();
@@ -109,7 +115,8 @@ public class GraphicsHandler {
             }
         }
     }
-    
+    // CreatePlaneT gir posisjoner til alle cellene i cellgraphTop,dette gjøres ved at for loopet går gjennom tabellen og 
+   //bestemmer posisjonen til cellen ut i fra posisijonen den har i tabellen. 
     public static void CreatePlaneT(CellGraph3D cg3d, Group g)
     {
         int x = cg3d.getX();
@@ -126,6 +133,9 @@ public class GraphicsHandler {
             }
         }
     }
+    //AdjustGroup utfører 3 oppgaver, første oppgaven er å gi group en posisjon i midten av skjermen, andre oppgaven er å skalere
+    // kuben enten større eller mindre avhening av kubens gjennomsnitts koordinater. Tredje oppgaven er å roterer kuben om de tre aksene 
+    // x,y og z. 
     public static void AdjustGroup(CellGraph3D cg3d, Group g)
     {
         int x = cg3d.getX();
@@ -149,6 +159,9 @@ public class GraphicsHandler {
         
         g.getTransforms().addAll(trans, scale, rotateX, rotateY, rotateZ); 
     }
+    
+    // paint vil gå gjennom alle tabellene og sjekke om den finner levenede celler, hvis en celle lever vil den blir gitt en farge.
+    // Hvis cellen er dø, så blir den hvit. Fargen er avhengig av cellenes posisjon i kuben. 
     public static void Paint(CellGraph3D cg3d)
     {
         PhongMaterial white = new PhongMaterial(Color.rgb(255,255,255));
