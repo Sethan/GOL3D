@@ -200,7 +200,7 @@ public class FileHandler {
        // Her vil programmet ta imot et encoded tekst og løpe gjennom teksten, dette gjør den helt til den finner et tall(digit). 
       // Ettersom den finner et tall vil den da finne bokstaven etter tallet og lage like mange av det bokstavet som tallet. 
      // Altså, hvis programmet finner tallet 5 og bokstaven o bak tallet, vil den lagre 5 o-er.
-    Koden tar imot et encoded tekst og løper gjennom teksten. Når den finner et tall så finner den det neste bosktavet
+     
     private static String RunLengthDecoded(String s)
     {
         String decodedString ="";
