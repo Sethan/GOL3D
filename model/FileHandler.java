@@ -171,7 +171,7 @@ public class FileHandler {
             ErrorHandler.showError("Save error", e.toString());
         }
     }
-  
+    //  
     private static String RunLenghtEncoded(String s)
     {
         String encodedString ="";
