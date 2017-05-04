@@ -11,7 +11,7 @@ package model;
  * @author lars
  */
 
-// Her vil dimisjonene til kuben deklareres.
+
 public class CellGraph3D {
     
     private final CellGraphRight right;
@@ -21,6 +21,7 @@ public class CellGraph3D {
     private final int yDimension;
     private final int zDimension;
     
+    // Her vil dimisjonene til kuben deklareres.
     public CellGraph3D(int x, int y, int z)
     {
         this.right=new CellGraphRight(y,z);
