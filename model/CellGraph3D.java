@@ -10,6 +10,8 @@ package model;
  *
  * @author lars
  */
+
+// Her vil dimisjonene til kuben deklareres.
 public class CellGraph3D {
     
     private final CellGraphRight right;
@@ -28,26 +30,32 @@ public class CellGraph3D {
         this.yDimension=y;
         this.zDimension=z;
     }
+    // Returnerer CellgrafRight
     public CellGraph getCGR()
     {
         return this.right;
     }
+    // Returnerer CellgrafTop
     public CellGraph getCGT()
     {
         return this.top;
     }
+    // Returnerer CellgrafLeft
     public CellGraph getCGL()
     {
         return this.left;
     }
+    // Returnerer x dimijsonen
     public int getX()
     {
         return this.xDimension;
     }
+    // Returnerer y dimijsonen
     public int getY()
     {
         return this.yDimension;
     }
+    // Returnerer z dimijsonen
     public int getZ()
     {
         return this.zDimension;
