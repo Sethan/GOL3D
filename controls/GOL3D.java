@@ -21,7 +21,9 @@ import javafx.stage.WindowEvent;
  * @author ZuraH
  */
 public class GOL3D extends Application {
-    
+    // Loader GOL3d fxml, setter scene, setter stage, loader bildet "cube.png",
+    // Setter titelen til "Conways Game of Life" og tilslutt setter stage.setMaxWidth
+    // stage.setMaxHeight, stage.setMinHeight og stage.setMinWidth.
     @Override
     public void start(Stage stage) throws Exception {
         AnchorPane root = FXMLLoader.load(getClass().getResource("/view/GOL3D.fxml"));
