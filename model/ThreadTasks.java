@@ -9,6 +9,9 @@ package model;
  *
  * @author ZuraH
  */
+
+// Her vil den bruke enten cellgrapfleft,top eller right og 3dcellgrapf til å først lage en ny copy av grafen og deretter endre copyet 
+// etter reglene for game of life. 
 public class ThreadTasks {
     public static void RunPattern(CellGraph cg, CellGraph3D cg3d)
     {
@@ -28,6 +31,7 @@ public class ThreadTasks {
             }
         }    
     }
+    // WritePattern bruker copien til å skrive over ogrinalen. 
     public static void WritePattern(CellGraph cg)
     {
         for(int i=0; i< cg.getW();i++)
