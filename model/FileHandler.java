@@ -171,7 +171,8 @@ public class FileHandler {
             ErrorHandler.showError("Save error", e.toString());
         }
     }
-    //  
+    //  Koden tar imot et string også enkoder den. Det vil si hvis den i teksten finner 
+    //  gjentagende bostraver så blir det gjort om til et nummer.
     private static String RunLenghtEncoded(String s)
     {
         String encodedString ="";
