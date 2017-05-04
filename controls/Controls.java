@@ -38,10 +38,17 @@ import model.LineGraphData;
  *
  * @author lars
  */
+
 public class Controls implements Initializable {
     
     
-    
+    // Intialize oppretter en timer med tasken task og intervall på 500 milisekunder. 
+    // Den oppretter en ny eventlistener på group som sjekker om en celle blir trykket på, 
+    // og om en celler blir trykket på endrer tilstanden deres. 
+    // Den bruker GraphicsHandler, CreatePlaneL, CreatePlaneT, CreatePlaneR, CreateGridLines og AdjustGroup
+    // til å opprette en kube. 
+    // Oppretter en ny stage med stilen utility og med scene linechart og eventlistener når du prøver å lukke den vil den bli usynelig.  
+    // LinceChart får to nye akser der hvor x aksen har navnet "GOL Generations" og lineChart har titelen "GOL Statistics". 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) 
     {
@@ -88,7 +95,7 @@ public class Controls implements Initializable {
     Stage stage = new Stage();
            
     
-    //user events
+    //SpeedIncreased sin oppgave er å endre timer hastigheten bestemt av speedsliderens verdi.
     public void speedIncreased(MouseEvent event)
     {
         int delay = 350-15*(int)Math.sqrt(speedSlider.getValue());
@@ -96,18 +103,19 @@ public class Controls implements Initializable {
         task = new RunTimer();
         timer.scheduleAtFixedRate(task, 250, delay);
     }
-
+    // Når brukeren trykker på "stopp" knappen vil programmet sette play til false som vil stoppe GOL.
     public void stopButton(ActionEvent event)
     {
 	play=false;     
     }
-    
+    // Når brukeren trykker på "play" knappen vil programmet setter "play" til å være true som starter GOL. 
+  
     public void startButton(ActionEvent event)
     {
         play=true;   
-        GraphicsHandler.Paint(test);
+        
     }    
-    
+    // Setter play til false og vil resette all informasjonen i kuben og linechart. 
     public void resetButton(ActionEvent event)
     {
         play=false;
@@ -118,20 +126,20 @@ public class Controls implements Initializable {
         lineData.resetData();
         lineData.updateGraph(lineChart);
     }
-    
+    // vil sette play til false og så loade filen du har lagret tidligere. 
     public void loadEvent(ActionEvent event)
     {
         play=false;
         FileHandler.loadFile(test);
         GraphicsHandler.Paint(test);
     }
-    
+    // Setter play til false, og lagrer mønsteret du har creata. 
     public void saveEvent(ActionEvent event)
     {
         play=false;  
         FileHandler.saveFile(test);
     }
- 
+    // Setter play til false, sletter alt som er lagret på group og vil opprette en kube ut i fra brukerens x,y,z verdier. 
     public void changeDimensions(ActionEvent event)
     {
         play=false;
@@ -146,14 +154,18 @@ public class Controls implements Initializable {
         GraphicsHandler.AdjustGroup(test, group);
         GraphicsHandler.Paint(test);
     }
-    
+    // viser frem Grafen. 
     public void showGraphEvent()
     {                 
         stage.show();
         lineData.updateGraph(lineChart);
     }
 
-    
+    // Her vil int[] data hente og lagre informasjon som skal bli brukt i lineData.updateData
+    // Oppretter så 3 threads og submitter dem til executor og venter til de tre oppgavene er ferdige.
+    // NÅr oppgaven er ferdig vil tre nye oppgaver bli gitt til executor og igjen vil den vente til oppgavene er ferdig 
+    // før vi igjen gir executor siste oppgaven. 
+	
     private class RunTimer extends TimerTask
     {
         @Override 
@@ -212,7 +224,8 @@ public class Controls implements Initializable {
     
     
     
-    //Threads
+    // Følgene classer er Task<Void> som bruker oppgavene i  ThreadTask med varierende parametere, bortsett fra PaintPlanes 
+    // som bruker GraphicsHandler.Paint.
     class PaintPlanes extends Task<Void>
     {
         @Override 
